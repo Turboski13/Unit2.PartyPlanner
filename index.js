@@ -53,3 +53,31 @@ function renderEvents() {
     eventsListList.replaceChildren(...eventCards);
   }
   
+  /**
+ * Ask the API to create a new event based on form data
+ * @param {Event} event
+ */
+async function addEvents(event) {
+    event.preventDefault();
+  
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: addEventsForm.name.value,
+          description: addEventsForm.description.value,
+          date: addEventsForm.date.value,
+          location: addEventsForm.location.value,
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to create event");
+      }
+  
+      render();
+    } catch (error) {
+      console.error(error);
+    }
+  }
