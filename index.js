@@ -12,7 +12,7 @@ addEventForm.addEventListener("submit", addEvent);
 /**
  * Sync state with the API and rerender
  */
-sync function render() {
+async function render() {
     await getEvents();
     renderEvents();
   }
@@ -53,6 +53,18 @@ function renderEvents() {
     eventsListList.replaceChildren(...eventCards);
   }
   
+// async // await example
+(async () => {
+    for (let i = 0; i < 5; i++) {
+        const { event } = await getEvents();
+        const pElm = document.createElement("p");
+        pElm.innerText = event;
+        document.getElementById('content').append(pElm)
+        }
+})();
+
+
+
   /**
  * Ask the API to create a new event based on form data
  * @param {Event} event
