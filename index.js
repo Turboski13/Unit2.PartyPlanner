@@ -1,23 +1,24 @@
 const COHORT = "2405-FBT-ET-WEB-PT";
-const API_URL = `https://fsa-crud-2aa9294fe819.herokuapp.com/api${COHORT}/events`;
+const API_URL = `https://fsa-crud-2aa9294fe819.herokuapp.com/api${2405-FBT-ET-WEB-PT}/events`;
 
 const state = {
   events: [],
 };
 
 const eventsList = document.querySelector("#events");
+const addEventForm = document.querySelector("#addEvents");
 
-const addEventForm = document.querySelector("#addEvent");
+addEventForm.addEventListener("addEventButton", addEvent);
 
-addEventForm.addEventListener("submit", addEvent);
 /**
  * Sync state with the API and rerender
  */
 async function render() {
-  await getEvents();
+  await getevents();
   renderEvents();
 }
 render();
+
 /**
  * Update state with events from API
  */
@@ -31,16 +32,29 @@ async function getEvents() {
   }
 }
 
-/* // async // await example
-(async () => {
-    for (let i = 0; i < 5; i++) {
-        await getEvents();
-        const pElm = document.createElement("p");
-        pElm.innerText = state.events[i] ? state.events[i].name : 'No event';
-        document.getElementById('content').append(pElm)
-        }
-})();
+
+/**
+ * Render artists from state
  */
+function renderEvents() {
+  if (!state.events.length) {
+    eventsListList.innerHTML = "<li>No events.</li>";
+    return;
+  }
+  const eventCards = state.events.map((events) => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <h2>${events.name}</h2>
+      <p>${events.description}</p>
+      <p>${events.date}</p>
+      <p>${events.location}</p>
+    `;
+    return li;
+  });
+
+  eventsListList.replaceChildren(...eventCards);
+}
+
 /**
  * Ask the API to create a new event based on form data
  * @param {Event} event
@@ -70,13 +84,45 @@ async function addEvents(event) {
   }
 }
 
+
+
+
+
+
+
+
+
+
+/* 
+function addEvent(){
+  const submitEvent = {    };
+  eventsList.push(eventCards);
+  addEvent(events);
+  }
+
+
+
+ */
+
+/* // async // await example
+(async () => {
+    for (let i = 0; i < 5; i++) {
+        await getEvents();
+        const pElm = document.createElement("p");
+        pElm.innerText = state.events[i] ? state.events[i].name : 'No event';
+        document.getElementById('content').append(pElm)
+        }
+})();
+ */
+
+
 //initial Arrrays for the table
-const headers = ["Name", "Date", "Location", "Description"];
-const initialEvents = [
+/* const headers = ["Name", "Date", "Location", "Description"];
+const initialEvents = [ */
   /**
    * Render events from state
    */
-  function renderEvents() {
+  /* function renderEvents() {
     if (!state.events.length) {
       eventsList.innerHTML = "<li>No events.</li>";
       return;
@@ -95,23 +141,24 @@ const initialEvents = [
 
     eventsList.replaceChildren(...eventCards);
   },
-];
+]; */
 
 //create the table
-const table = document.createElement("table");
+/* const table = document.createElement("table");
 const tableHeader = document.createElement("thead");
 const headerRow = document.createElement("tr");
-const tableBody = document.createElement("tbody");
+const tableBody = document.createElement("tbody"); */
 
 //attach table elements to body
-body.append(table);
+/* body.append(table);
 table.append(tableHeader);
-table.append(tableBody);
+table.append(tableBody); */
 
 //fill table header
-headers.forEach((item) => {
+/* headers.forEach((item) => {
   const th = document.createElement("th");
   th.innerText = item;
   headerRow.append(th);
 });
 tableHeader.append(headerRow);
+ */
