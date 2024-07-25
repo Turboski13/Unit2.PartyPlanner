@@ -44,13 +44,18 @@ function renderEvents() {
   const eventCards = state.events.map((event) => {
     const li = document.createElement("li");
     li.innerHTML = `
-      <h2>${event.name}</h2>
+      <h1>${event.name}</h2>
       <p>${event.description}</p>
       <p>${event.date}</p>
       <p>${event.location}</p>
+      <button type = "button" onclick = eventDelete(this)>Delete</button>
     `;
     return li;
   });
+  
+  function eventDelete(event) {
+    event.parent("h1", "p" ).remove();
+  }
 
   eventsListList.replaceChildren(...eventCards);
 }
@@ -84,20 +89,16 @@ async function addEvent(event) {
   }
 }
 
-console.log(state.events)
 
 
 
 
-// add a delete button to everything displayed
+
+// add a delete button to everything displayed. line 73?
 
 // issues: it's not displaying, need to add delete button, need to test submit button
 
 
-
-
-
- */
 
 /* // async // await example
 (async () => {
@@ -109,7 +110,6 @@ console.log(state.events)
         }
 })();
  */
-
 
 
 //initial Arrrays for the table
