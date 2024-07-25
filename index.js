@@ -1,20 +1,20 @@
 const COHORT = "2405-FBT-ET-WEB-PT";
-const API_URL = `https://fsa-crud-2aa9294fe819.herokuapp.com/api${2405-FBT-ET-WEB-PT}/events`;
+const API_URL = `https://fsa-crud-2aa9294fe819.herokuapp.com/api${COHORT}/events`;
 
 const state = {
   events: [],
 };
 
 const eventsList = document.querySelector("#events");
-const addEventForm = document.querySelector("#addEvents");
+const addEventForm = document.querySelector("#addEvent");
 
-addEventForm.addEventListener("addEventButton", addEvent);
+addEventForm.addEventListener("submit", addEvent);
 
 /**
  * Sync state with the API and rerender
  */
 async function render() {
-  await getevents();
+  await getEvents();
   renderEvents();
 }
 render();
@@ -34,20 +34,20 @@ async function getEvents() {
 
 
 /**
- * Render artists from state
+ * Render events from state
  */
 function renderEvents() {
   if (!state.events.length) {
-    eventsListList.innerHTML = "<li>No events.</li>";
+    eventsList.innerHTML = "<li>No events.</li>";
     return;
   }
-  const eventCards = state.events.map((events) => {
+  const eventCards = state.events.map((event) => {
     const li = document.createElement("li");
     li.innerHTML = `
-      <h2>${events.name}</h2>
-      <p>${events.description}</p>
-      <p>${events.date}</p>
-      <p>${events.location}</p>
+      <h2>${event.name}</h2>
+      <p>${event.description}</p>
+      <p>${event.date}</p>
+      <p>${event.location}</p>
     `;
     return li;
   });
@@ -59,7 +59,7 @@ function renderEvents() {
  * Ask the API to create a new event based on form data
  * @param {Event} event
  */
-async function addEvents(event) {
+async function addEvent(event) {
   event.preventDefault();
 
   try {
