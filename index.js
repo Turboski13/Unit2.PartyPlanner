@@ -84,21 +84,16 @@ async function addEvent(event) {
   }
 }
 
+console.log(state.events)
 
 
 
 
+// add a delete button to everything displayed
+
+// issues: it's not displaying, need to add delete button, need to test submit button
 
 
-
-
-
-/* 
-function addEvent(){
-  const submitEvent = {    };
-  eventsList.push(eventCards);
-  addEvent(events);
-  }
 
 
 
@@ -116,32 +111,11 @@ function addEvent(){
  */
 
 
+
 //initial Arrrays for the table
 /* const headers = ["Name", "Date", "Location", "Description"];
 const initialEvents = [ */
-  /**
-   * Render events from state
-   */
-  /* function renderEvents() {
-    if (!state.events.length) {
-      eventsList.innerHTML = "<li>No events.</li>";
-      return;
-    }
-
-    const eventCards = state.events.map((event) => {
-      const li = document.createElement("li");
-      li.innerHTML = `
-      <h2>${events.name}</h2>
-      <p>${events.description}</p>
-      <p>${events.date}</p>
-      <p>${events.location}</p>
-    `;
-      return li;
-    });
-
-    eventsList.replaceChildren(...eventCards);
-  },
-]; */
+  
 
 //create the table
 /* const table = document.createElement("table");
@@ -149,10 +123,12 @@ const tableHeader = document.createElement("thead");
 const headerRow = document.createElement("tr");
 const tableBody = document.createElement("tbody"); */
 
+
 //attach table elements to body
 /* body.append(table);
 table.append(tableHeader);
 table.append(tableBody); */
+
 
 //fill table header
 /* headers.forEach((item) => {
