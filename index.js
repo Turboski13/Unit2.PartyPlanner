@@ -1,5 +1,5 @@
-const COHORT = "2405-FBT-ET-WEB-PT";
-const API_URL = `https://fsa-crud-2aa9294fe819.herokuapp.com/api${COHORT}/events`;
+const COHORT = "2405-ftb-et-web-pt";
+const API_URL = `https://fsa-crud-2aa9294fe819.herokuapp.com/api/${COHORT}/events`;
 
 const state = {
   events: [],
@@ -8,12 +8,13 @@ const state = {
 const eventsList = document.querySelector("#events");
 const addEventForm = document.querySelector("#addEvent");
 
-addEventForm.addEventListener("submit", addEvent);
+/* addEventForm.addEventListener("submit", addEvent); */
 
 /**
  * Sync state with the API and rerender
  */
 async function render() {
+  console.log(API_URL);
   await getEvents();
   renderEvents();
 }
@@ -52,19 +53,19 @@ function renderEvents() {
     `;
     return li;
   });
-  
+
   function eventDelete(event) {
     event.parent("h1", "p" ).remove();
   }
 
-  eventsListList.replaceChildren(...eventCards);
+  eventsList.replaceChildren(...eventCards);
 }
 
 /**
  * Ask the API to create a new event based on form data
  * @param {Event} event
  */
-async function addEvent(event) {
+/* async function addEvent(event) {
   event.preventDefault();
 
   try {
@@ -87,7 +88,7 @@ async function addEvent(event) {
   } catch (error) {
     console.error(error);
   }
-}
+} */
 
 
 
