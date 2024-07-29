@@ -65,7 +65,7 @@ function renderEvents() {
  * Ask the API to create a new event based on form data
  * @param {Event} event
  */
-/* async function addEvent(event) {
+/* /async function addEvent(event) {
   event.preventDefault();
 
   try {
@@ -88,9 +88,9 @@ function renderEvents() {
   } catch (error) {
     console.error(error);
   }
-} */
+} 
 
-
+ */
 
 
 
