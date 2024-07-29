@@ -6,9 +6,9 @@ const state = {
 };
 
 const eventsList = document.querySelector("#events");
-const addEventForm = document.querySelector("#addEvent");
+const addEventsForm = document.querySelector("#addEvents");
 
-/* addEventForm.addEventListener("submit", addEvent); */
+addEventsForm.addEventListener("submit", addEvent);
 
 /**
  * Sync state with the API and rerender
@@ -16,6 +16,7 @@ const addEventForm = document.querySelector("#addEvent");
 async function render() {
   console.log(API_URL);
   await getEvents();
+  console.log("State after fetching events:", state);
   renderEvents();
 }
 render();
@@ -26,10 +27,14 @@ render();
 async function getEvents() {
   try {
     const response = await fetch(API_URL);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
     const json = await response.json();
     state.events = json.data;
+    console.log("Fetched events:", state.events);
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching events:", error);
   }
 }
 
@@ -45,38 +50,56 @@ function renderEvents() {
   const eventCards = state.events.map((event) => {
     const li = document.createElement("li");
     li.innerHTML = `
-      <h1>${event.name}</h2>
+      <h1>${event.name}</h1>
       <p>${event.description}</p>
       <p>${event.date}</p>
       <p>${event.location}</p>
-      <button type = "button" onclick = eventDelete(this)>Delete</button>
+      <button type="button" onclick="() => eventDelete(${event.id})">Delete</button>
     `;
     return li;
   });
-
-  function eventDelete(event) {
-    event.parent("h1", "p" ).remove();
-  }
-
   eventsList.replaceChildren(...eventCards);
 }
 
 /**
+ * Ask the API to delete an event
+ * @param {number} id
+ */
+  async function eventDelete(id) {
+    try {
+      const response = await fetch(`${API_URL}/${id}`, {
+        method: "DELETE",
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to delete event");
+      }
+  
+      render();
+    } catch (error) {
+      console.error("Error deleting event:", error);
+    }
+  }
+
+ 
+
+/**
  * Ask the API to create a new event based on form data
  * @param {Event} event
- */
-/* /async function addEvent(event) {
+ */ 
+async function addEvent(event) {
   event.preventDefault();
 
   try {
+    console.log(addEventsForm.location.value);
     const response = await fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        name: addEventForm.name.value,
-        description: addEventForm.description.value,
-        date: addEventForm.date.value,
-        location: addEventForm.location.value,
+        name: addEventsForm.name.value,
+        description: addEventsForm.description.value,
+        date: new Date (addEventsForm.date.value),
+        location: addEventsForm.location.value,
       }),
     });
 
@@ -89,53 +112,3 @@ function renderEvents() {
     console.error(error);
   }
 } 
-
- */
-
-
-
-
-// add a delete button to everything displayed. line 73?
-
-// issues: it's not displaying, need to add delete button, need to test submit button
-
-
-
-/* // async // await example
-(async () => {
-    for (let i = 0; i < 5; i++) {
-        await getEvents();
-        const pElm = document.createElement("p");
-        pElm.innerText = state.events[i] ? state.events[i].name : 'No event';
-        document.getElementById('content').append(pElm)
-        }
-})();
- */
-
-
-//initial Arrrays for the table
-/* const headers = ["Name", "Date", "Location", "Description"];
-const initialEvents = [ */
-  
-
-//create the table
-/* const table = document.createElement("table");
-const tableHeader = document.createElement("thead");
-const headerRow = document.createElement("tr");
-const tableBody = document.createElement("tbody"); */
-
-
-//attach table elements to body
-/* body.append(table);
-table.append(tableHeader);
-table.append(tableBody); */
-
-
-//fill table header
-/* headers.forEach((item) => {
-  const th = document.createElement("th");
-  th.innerText = item;
-  headerRow.append(th);
-});
-tableHeader.append(headerRow);
- */
