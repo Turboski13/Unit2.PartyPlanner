@@ -54,7 +54,7 @@ function renderEvents() {
       <p>${event.description}</p>
       <p>${event.date}</p>
       <p>${event.location}</p>
-      <button type="button" onclick="() => eventDelete(${event.id})">Delete</button>
+      <button type="button" onclick="eventDelete(${event.id})">Delete</button>
     `;
     return li;
   });
@@ -66,8 +66,10 @@ function renderEvents() {
  * @param {number} id
  */
   async function eventDelete(id) {
+    var deleteURL = API_URL + "/" + id;
+    console.log(deleteURL);
     try {
-      const response = await fetch(`${API_URL}/${id}`, {
+      const response = await fetch(deleteURL, {
         method: "DELETE",
       });
   
